@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Orders</title>
+</head>
+<body>
+    <%- include("./partials/navbar.ejs", {user: user}) %>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">User Id</th>
+                    <th scope="col">Order Number</th>
+                    <th scope="col">Current Status</th>
+                    <th scope="col">Update Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <% orders.forEach((order) => { %>
+                <tr>
+                    <th scope="row"><%= order.UserId %></th>
+                    <td><%= order.OrderNumber %></td>
+                    <td><%= order.OrderStatus.Status %></td>
+                    <td>
+                        <div class="btn-group-vertical">
+                            <button class="btn btn-primary" onclick="updateUserOrderStatus(1, '<%= order.OrderNumber %>')"> In Progress </button>
+                            <button class="btn btn-primary" onclick="updateUserOrderStatus(2, '<%= order.OrderNumber %>')"> Ordered </button>
+                            <button class="btn btn-primary" onclick="updateUserOrderStatus(3, '<%= order.OrderNumber %>')"> Completed </button>
+                        </div>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

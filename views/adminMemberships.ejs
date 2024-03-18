@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Memberships</title>
+</head>
+<body>
+    <%- include("./partials/navbar.ejs", {user: user}) %>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Membership Level</th>
+                    <th scope="col">Discount</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% memberships.forEach((membership) => { %>
+                <tr>
+                    <th scope="row"><%= membership.id %></th>
+                    <td><%= membership.Status %></td>
+                    <td><%= membership.Discount * 100 %>%</td>
+                    <td> <button class="btn btn-primary" onclick="updateMembership(<%= membership.id %>)"> Update </button></td>
+                    <td> <button class="btn btn-danger" onclick="deleteMembership(<%= membership.id %>)"> Delete </button></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button class="btn btn-success" onclick="createMembership()"> Add Membership Status </button>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Products</title>
+</head>
+<body>
+    <%- include("./partials/navbar.ejs", {user: user}) %>
+    <div class="container">
+        <div class=" text-center">
+            <button  class="btn btn-success" onclick="createProduct()"> Add Product </button>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <input type="text" id="Name" placeholder="Name" class="form-control">
+                </div>
+                <div class="col-6">
+                    <input type="text" id="Description" placeholder="Description" class="form-control">
+                </div>
+                <div class="col-6">
+                    <input type="text" id="Price" placeholder="Price" class="form-control">
+                </div>
+                <div class="col-6">
+                    <input type="text" id="Imgurl" placeholder="Imgurl" class="form-control">
+                </div>
+                <div class="col-6">
+                    <input type="text" id="Quantity" placeholder="Quantity" class="form-control">
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-light btn-md dropdown-toggle d-block" type="button" id="brandDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Brand
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="brandDropdown">
+                       
+                        <% brands.forEach( (brand) => {%>
+                        <a class="dropdown-item" onclick="selectBrand('<%= brand.id %>', '<%= brand.Brand %>')"><%= brand.Brand %></a>
+                        <% }); %>
+                    </div>
+                    <input type="hidden" id="selectedBrand">
+                </div>
+                    <div class="col-6">
+                        <button class="btn btn-light btn-md dropdown-toggle d-block" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select Category
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+                            <% categories.forEach( (category) => {%>
+                                <a class="dropdown-item" onclick="selectCategories('<%= category.id %>', '<%= category.Category %>')"><%= category.Category %></a>
+                            <% }); %>
+                        </div>
+                        <input type="hidden" id="selectedCategory">
+                    </div>
+                        
+            </div>
+        </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="text-center col-6">
+                    <input type="text" id="search" placeholder="Search products, brands or categories" class="form-control">
+                    <button class="btn btn-primary" onclick="searchFunction()"> Search </button>
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Imgurl</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Is Deleted</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Delete</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach((product) => { %>
+                    <tr class="text-center">
+                        <th class="align-middle" scope="row"><%= product.id %></th>
+                        <td class="align-middle col-4">
+                            <span class="d-block"><%= product.Name %></span>
+                            <div class="mt-2">
+                                <button class="btn btn-primary btn-sm" onclick="updateProduct('<%= JSON.stringify(product) %>', 'Name')">Update</button>
+                            </div>
+                        </td>
+                        <td class="align-middle col-1 col-4">
+                            <span class="d-block"><%= product.Description %></span>
+                            <div class="mt-2">
+                                <button class="btn btn-primary btn-sm mt-auto" onclick="updateProduct('<%= JSON.stringify(product) %>', 'Description')">Update</button>
+                            </div>
+                        </td>
+                        <td class="align-middle col-1">
+                            <span class="d-block"><%= product.UnitPrice %></span>
+                            <div class="mt-2">
+                                <button class="btn btn-primary btn-sm mt-auto" onclick="updateProduct('<%= JSON.stringify(product) %>', 'UnitPrice')">Update</button>
+                            </div>
+                        </td>
+                        <td class="align-middle col-1">
+                            <span class="d-block"> <img src="<%= product.imgurl %>" alt="Error" width="50px"></span>
+                            <div class="mt-2">
+                                <button class="btn btn-primary btn-sm mt-auto" onclick="updateProduct('<%= JSON.stringify(product) %>', 'imgurl')">Update</button>
+                            </div>
+                        </td>
+                        <td class="align-middle col-1">
+                            <span class="d-block"><%= product.Quantity %></span>
+                            <div class="mt-2">
+                                <button class="btn btn-primary btn-sm mt-auto" onclick="updateProduct('<%= JSON.stringify(product) %>', 'Quantity')">Update</button>
+                            </div>
+                        </td>
+                        <td class="align-middle col-1">
+                            <span class="d-block"><%= product.IsDeleted %></span>
+                            <div class="mt-2">
+                                <button class="btn btn-primary btn-sm mt-auto" onclick="updateProduct('<%= JSON.stringify(product) %>', 'IsDeleted')">Update</button>
+                            </div>
+                        </td>
+                        <td class="align-middle col-1">
+                            <div class="dropdown">
+                                <span class="d-block"><%= product.Brand %></span>
+                                <div class="mt-2">
+                                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="brandDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Select Brand
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="brandDropdown">
+                                        <% 
+                                        brands.forEach( (brand) => {
+                                        %>
+                                        <a class="dropdown-item" onclick="updateBrandOrCategory('<%= brand.id %>', '<%= JSON.stringify(product) %>', 'BrandId')"><%= brand.Brand %></a>
+                                        <% }); %>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle col-1">
+                            <div class="dropdown">
+                                <span class="d-block"><%= product.Category %></span>
+                                <div class="mt-2">
+                                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="CategoryDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Select Category
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="CategoryDropdown">
+                                        <% 
+                                        categories.forEach( (category) => {
+                                        %>
+                                        <a class="dropdown-item" onclick="updateBrandOrCategory('<%= category.id %>', '<%= JSON.stringify(product) %>', 'CategoryId')"><%= category.Category %></a>
+                                        <% }); %>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle col-1">
+                            <button class="btn btn-danger mt-auto" onclick="deleteProduct('<%= JSON.stringify(product) %>' )">Delete</button>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

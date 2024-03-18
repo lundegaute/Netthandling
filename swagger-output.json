@@ -1,0 +1,1336 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "eCommerce",
+    "description": "Documentation for eCommerce Exam Project"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Index"
+        ],
+        "description": "Welcome Screen",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Register a new user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Signup"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Login with username or email and password",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Changing role value on a user. Only Admin can change this",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateUserRole"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/products/": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "description": "Get all products that are not deleted in the database",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "description": "Create a new product",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateProduct"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "description": "Update a product",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateProduct"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "description": "Soft delete a product (setting IsDeleted = 1)",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DeleteProduct"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/cart/": {
+      "get": {
+        "tags": [
+          "Cart"
+        ],
+        "description": "Get logged in user cart",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "description": "Create new category",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AddToCart"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Cart"
+        ],
+        "description": "Update Cart product quantity",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateCartProduct"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Cart"
+        ],
+        "description": "Delete Cart product.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DeleteCartProduct"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/cart/checkout": {
+      "post": {
+        "tags": [
+          "Cart"
+        ],
+        "description": "Checkout logged in user cart",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/orders/": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Get all orders for logged in user. Admin users get a list of every users orders",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Update orderStatus of the order connected to the orderNumber",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateOrderStatus"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/orderStatuses/": {
+      "get": {
+        "tags": [
+          "OrderStatus"
+        ],
+        "description": "Get all OrderStatuses",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OrderStatus"
+        ],
+        "description": "Update the status of an order belonging to specific orderNumber",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateOrderStatus"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/brands/": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "description": "Get all brands in database",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Brands"
+        ],
+        "description": "Create brand. Brand can be anything execpt for a number",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateBrand"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Brands"
+        ],
+        "description": "Updart brand name using brand name as the key",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateBrand"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Brands"
+        ],
+        "description": "Delete a brand, if its not active on any products",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DeleteBrand"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/memberships/": {
+      "get": {
+        "tags": [
+          "Membership"
+        ],
+        "description": "Get all membership levels",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Membership"
+        ],
+        "description": "Create new membership",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateMembership"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Membership"
+        ],
+        "description": "Update one of the current membership levels",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateMembership"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Membership"
+        ],
+        "description": "Deleting a membership level, only if it do not belong to a user",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DeleteMembership"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/categories/": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "Get all categories in database",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "Create new category. Can be anything except for a number",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateCategory"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "Update category",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateCategory"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Categories"
+        ],
+        "description": "Delete category based on category name",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DeleteCategory"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/init/": {
+      "post": {
+        "tags": [
+          "Init"
+        ],
+        "description": "Initializing the entire database with Product, Brands, Categories, Membership levels, Order statuses, Roles and creating an admin user",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/search/": {
+      "post": {
+        "tags": [
+          "Search"
+        ],
+        "description": "Search for product names (full names not needed), Brand names and Category name (Full name needed)",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Search"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Get login page for admin UI",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/dashboard": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Get dashboard page for admin after successful login",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/products": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Get admin products page with crud functionality",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/products/{data}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Searching for product name, brand or category using the search bar in the products page",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/brands": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Get a list of all brands with crud functionality",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/categories": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Get categories page for admin with crud functionality",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/memberships": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Get membership page for admin with crud functionality",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/orders": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Get orders page for admin, where only order status can be changed",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/users": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Get a list of all users (Only user id, username and role is vissible), with possibility to change user Role to Admin or User",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/orderStatuses": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Get all user orders (Only orderNumber vissible). Only orderStatus can be updated",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/login": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Login functionality for admin users. Logging in to localhost with an admin will make all these methods work, because the admin ui uses res.cookie instead of authorization header",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/logout": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Logout does not remove the cookie stored in the browser, but you can then login with another user",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/roles/": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Login": {
+      "type": "object",
+      "properties": {
+        "emailOrUsername": {
+          "type": "string",
+          "example": "Admin"
+        },
+        "password": {
+          "type": "string",
+          "example": "P@ssword2023"
+        }
+      },
+      "required": [
+        "emailOrUsername",
+        "password"
+      ]
+    },
+    "Signup": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "example": "Admin"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Support"
+        },
+        "userName": {
+          "type": "string",
+          "example": "Admin"
+        },
+        "email": {
+          "type": "string",
+          "example": "Admin@noroff.no"
+        },
+        "password": {
+          "type": "string",
+          "example": "P@ssword2023"
+        },
+        "address": {
+          "type": "string",
+          "example": "Online"
+        },
+        "telephoneNumber": {
+          "type": "string",
+          "example": "911"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "userName",
+        "email",
+        "password",
+        "address",
+        "telephoneNumber"
+      ]
+    },
+    "UpdateUserRole": {
+      "type": "object",
+      "properties": {
+        "newRole": {
+          "type": "string",
+          "example": "1"
+        },
+        "id": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      "required": [
+        "newRole",
+        "id"
+      ]
+    },
+    "CreateBrand": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string",
+          "example": "SwaggerBrandTest"
+        }
+      },
+      "required": [
+        "brand"
+      ]
+    },
+    "UpdateBrand": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1"
+        },
+        "updatedBrand": {
+          "type": "string",
+          "example": "NewBrandName"
+        }
+      },
+      "required": [
+        "id",
+        "updatedBrand"
+      ]
+    },
+    "DeleteBrand": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string",
+          "example": "SwaggerBrandTest"
+        }
+      },
+      "required": [
+        "brand"
+      ]
+    },
+    "CreateCategory": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "example": "SwaggerCategoryTest"
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "UpdateCategory": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1"
+        },
+        "updatedCategory": {
+          "type": "string",
+          "example": "NewCategoryName"
+        }
+      },
+      "required": [
+        "id",
+        "updatedCategory"
+      ]
+    },
+    "DeleteCategory": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "example": "SwaggerCategoryTest"
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "CreateProduct": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "example": "Any text"
+        },
+        "Description": {
+          "type": "string",
+          "example": "Any text"
+        },
+        "UnitPrice": {
+          "type": "string",
+          "example": "999"
+        },
+        "imgurl": {
+          "type": "string",
+          "example": "Any text"
+        },
+        "Quantity": {
+          "type": "string",
+          "example": "10"
+        },
+        "BrandId": {
+          "type": "string",
+          "example": "1"
+        },
+        "CategoryId": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      "required": [
+        "Name",
+        "Description",
+        "UnitPrice",
+        "imgurl",
+        "Quantity",
+        "BrandId",
+        "CategoryId"
+      ]
+    },
+    "UpdateProduct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "17"
+        },
+        "Name": {
+          "type": "string",
+          "example": "Updated Product Name"
+        },
+        "Description": {
+          "type": "string",
+          "example": "Updated"
+        },
+        "UnitPrice": {
+          "type": "string",
+          "example": "649"
+        },
+        "imgurl": {
+          "type": "string",
+          "example": "Test"
+        },
+        "Quantity": {
+          "type": "string",
+          "example": "10"
+        },
+        "IsDeleted": {
+          "type": "string",
+          "example": "0"
+        },
+        "BrandId": {
+          "type": "string",
+          "example": "1"
+        },
+        "CategoryId": {
+          "type": "string",
+          "example": "5"
+        }
+      },
+      "required": [
+        "id",
+        "Name",
+        "Description",
+        "UnitPrice",
+        "imgurl",
+        "Quantity",
+        "IsDeleted",
+        "BrandId",
+        "CategoryId"
+      ]
+    },
+    "DeleteProduct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "AddToCart": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "example": "1"
+        },
+        "quantity": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      "required": [
+        "productId",
+        "quantity"
+      ]
+    },
+    "UpdateCartProduct": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "example": "1"
+        },
+        "quantity": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      "required": [
+        "productId",
+        "quantity"
+      ]
+    },
+    "DeleteCartProduct": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      "required": [
+        "productId"
+      ]
+    },
+    "UpdateOrderStatus": {
+      "type": "object",
+      "properties": {
+        "newStatus": {
+          "type": "string",
+          "example": "2"
+        },
+        "orderNumber": {
+          "type": "string",
+          "example": "OrderNumberHere"
+        }
+      },
+      "required": [
+        "newStatus",
+        "orderNumber"
+      ]
+    },
+    "CreatingMembership": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "StatusName"
+        },
+        "discount": {
+          "type": "string",
+          "example": "50"
+        }
+      },
+      "required": [
+        "status",
+        "discount"
+      ]
+    },
+    "UpdateMembership": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1"
+        },
+        "newStatus": {
+          "type": "string",
+          "example": "UpdatedStatusName"
+        },
+        "newDiscount": {
+          "type": "string",
+          "example": "40"
+        }
+      },
+      "required": [
+        "id",
+        "newStatus",
+        "newDiscount"
+      ]
+    },
+    "DeleteMembership": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Search": {
+      "type": "object",
+      "properties": {
+        "userSearch": {
+          "type": "string",
+          "example": "iPhone"
+        }
+      },
+      "required": [
+        "userSearch"
+      ]
+    }
+  }
+}

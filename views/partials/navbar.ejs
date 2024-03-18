@@ -1,0 +1,52 @@
+
+<%- include("./links") %>
+<%- include("./scripts") %>
+<nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light position-fixed w-100 fixed-top">
+    <div class="container-fluid">
+        <p class="navbar-brand">Welcome <%= user.Username %></p>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <% if (!user) {%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Sign in</a>
+                    </li>
+                    <% } else {%>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dashboard">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/products">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/brands">Brands</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/categories">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/memberships">memberships</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/orders">Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/users">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/orderStatuses">Order Statuses</a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="/admin/logout" method="post">
+                                <button class="nav-link" type="submit"> Logout </button> 
+                            </form>
+                        </li>
+                        <% }; %>
+            </ul>
+        </div>
+    </div>
+</nav>

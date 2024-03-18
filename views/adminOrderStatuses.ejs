@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin OrderStatus</title>
+</head>
+<body>
+    <%- include("./partials/navbar.ejs", {user: user}) %>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">OrderStatus</th>
+                    <th scope="col">Update</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <% orderStatuses.forEach((status) => { %>
+                    <tr>
+                        <th scope="row"><%= status.id %></th>
+                        <td><%= status.Status %></td>
+                        <td> <button class="btn btn-primary" onclick="updateStatusName(<%= status.id %>)"> Change Name </button> </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

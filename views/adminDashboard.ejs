@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include("./partials/links.ejs") %>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <%- include("./partials/navbar.ejs", {user: user}) %>
+    <div class="container text-center">
+        <h1>Welcome <%= user.Username %></h1>
+        <div class="row">
+            <div class="col text-center">
+                <button onclick="location.href='/admin/products'" class="btn btn-primary">Products</button>
+                <button onclick="location.href='/admin/brands'" class="btn btn-primary">Brands</button>
+                <button onclick="location.href='/admin/categories'" class="btn btn-primary">Categories</button>
+                <button onclick="location.href='/admin/memberships'" class="btn btn-primary">Memberships</button>
+                <button onclick="location.href='/admin/orders'" class="btn btn-primary">Orders</button>
+                <button onclick="location.href='/admin/users'" class="btn btn-primary">Users</button>
+                <button onclick="location.href='/admin/orderStatuses'" class="btn btn-primary">Order Statuses</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
