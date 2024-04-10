@@ -23,7 +23,8 @@ If you are unsure of any instructions for the course assignment, contact out to 
 
 ---
 
-# Images
+# Admin UI Images
+Only accessible for admin users
 
 ![alt text](public/images/Dashboard.png)
 ![alt text](public/images/membership.png)
