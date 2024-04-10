@@ -23,6 +23,13 @@ If you are unsure of any instructions for the course assignment, contact out to 
 
 ---
 
+# Images
+
+![alt text](public/images/Dashboard.png)
+![alt text](public/images/membership.png)
+![alt text](public/images/Products.png)
+
+
 # Application installation:
 
 1. Installation:
